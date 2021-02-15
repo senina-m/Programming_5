@@ -145,7 +145,7 @@ public class ParserTest {
         objectMapper.setDateFormat(df);
         String json = objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(collectionKeeper);
         System.out.println(json);
-        //String json = objectMapper.writeValueAsString(collectionKeeper);
+        // String json = objectMapper.writeValueAsString(collectionKeeper);
         // assertEquals("Wrong ru.senina.lab5.CollectionKeeper serialization to json", expectedJson, json); // Не работает, т.к. время отличается
     }
 }
