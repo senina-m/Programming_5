@@ -1,0 +1,24 @@
+{
+"time" : "2021.02.14 AD at 22:06:09 MSK",
+"list" : [ {
+"id" : 1111,
+"name" : "element",
+"coordinates" : {
+"x" : 2,
+"y" : 3
+},
+"creationDate" : "2021-02-14T22:06:09.2031526",
+"minimalPoint" : 80.0,
+"description" : "my lovely Hori",
+"averagePoint" : 9,
+"difficulty" : "HOPELESS",
+"discipline" : {
+"name" : "Killing",
+"lectureHours" : 35,
+"practiceHours" : 65,
+"selfStudyHours" : 26
+}
+} ],
+"type" : "LinkedList",
+"amountOfElements" : 1
+}
