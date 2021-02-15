@@ -1,11 +1,7 @@
 package ru.senina.lab5;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-
 import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
 
 public class Main {
 
@@ -13,28 +9,8 @@ public class Main {
         //TODO: make reading from environment variables
         //filepath = System.getenv("SENINA_PATH");
         String filePath = "C:\\Users\\senin\\Desktop\\ITMO\\Programming\\Programming_5Lab\\src\\main\\resources\\inputData.json";
-
-            Parser parser = new Parser();
-            CollectionKeeper collectionKeeper = parser.fromJsonToCollectionKeeper(parser.fromFileToString(filePath));
-
-            Scanner sc = new Scanner(System.in);
-            boolean exit = false;
-            Map<String, Command> commandMap = new HashMap<>();
-            commandMap.put("info", new Command());
-            commandMap.put("show", new Command());
-            commandMap.put("add", new Command());
-            commandMap.put("update", new Command());
-            commandMap.put("remove_by_id", new Command());
-            commandMap.put("clear", new Command());
-            commandMap.put("save", new Command());
-            commandMap.put("execute_script", new Command());
-            commandMap.put("exit", new Command());
-            commandMap.put("remove_at", new Command());
-            commandMap.put("remove_greater", new Command());
-            commandMap.put("sort", new Command());
-            commandMap.put("min_by_difficulty", new Command());
-            commandMap.put("print_descending", new Command());
-
+        Keeper keeper = new Keeper(filePath);
+        keeper.start();
         String[] commands = new String[]{"help : вывести справку по доступным командам",
                     "info : вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)",
                     "show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении",
@@ -51,35 +27,6 @@ public class Main {
                     "min_by_difficulty : вывести любой объект из коллекции, значение поля difficulty которого является минимальным",
                     "filter_by_description description : вывести элементы, значение поля description которых равно заданному",
                     "print_descending : вывести элементы коллекции в порядке убывания"};
-
-            //Тут обрабатываю команды
-            String newLine = "";
-                while (!exit) {
-                newLine = sc.next();
-                //Help помощь
-                if (commandMap.containsKey(newLine)) {
-                    for (String line : commands) {
-                        System.out.println(line);
-                    }
-                }
-
-                //info вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)
-                if (newLine.equals("info")) {
-                    System.out.println(collectionKeeper.getType());
-                    System.out.println(collectionKeeper.getTime());
-                    System.out.println(collectionKeeper.getAmountOfElements());
-        //                //TODO: Do we need something else???
-                }
-
-                //Exit выход
-                if (newLine.equals("exit")) {
-                    exit = true;
-                }
-            }
-                sc.close();
-
-
-
             //Обратобать команды
             // info : вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)
             //show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении

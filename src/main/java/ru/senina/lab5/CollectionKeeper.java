@@ -50,4 +50,8 @@ public class CollectionKeeper {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd G 'at' HH:mm:ss z");
         return dateFormat.format(time);
     }
+
+    public String runCommand(Command command){
+        return "Здесь надо дописать функцию для всех команд";
+    }
 }

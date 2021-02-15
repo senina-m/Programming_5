@@ -1,33 +1,35 @@
 package ru.senina.lab5;
 
-import java.util.Scanner;
+import ru.senina.lab5.labwork.LabWork;
 
 public class Command {
-    private String commandDescription;
-    private Object parameter;
-    private Scanner scanner;
+    private final String name;
+    private LabWork labWorkElement;
+    private String stringParam;
 
-    public Scanner getScanner() {
-        return scanner;
+    public String getStringParam() {
+        return stringParam;
     }
 
-    public void setScanner(Scanner scanner) {
-        this.scanner = scanner;
+    public void setStringParam(String stringParam) {
+        this.stringParam = stringParam;
     }
 
-    public String getCommandDescription() {
-        return commandDescription;
+    public Command(String name) {
+        this.name = name;
+
     }
 
-    public void setCommandDescription(String commandDescription) {
-        this.commandDescription = commandDescription;
+    public LabWork getLabWorkElement() {
+        return labWorkElement;
     }
 
-    public Object getParameter() {
-        return parameter;
+    public void setLabWorkElement(LabWork labWorkElement) {
+        this.labWorkElement = labWorkElement;
     }
 
-    public void setParameter(Object parameter) {
-        this.parameter = parameter;
+    public String getName() {
+        return name;
     }
+
 }

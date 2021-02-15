@@ -33,4 +33,9 @@ public class Parser {
         return resultString.toString();
     }
 
+    public void fromJsonToFile(String filename, String json){}
+    public String fromCollectionKeeperToJson(CollectionKeeper collectionKeeper){
+        return "Пока так чтобы не ругулось";
+    }
+
 }
