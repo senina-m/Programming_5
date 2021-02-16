@@ -23,6 +23,21 @@ public class Keeper {
     }
 
     public void terminal() {
+        Map<String, Command> commandMap = new HashMap<>();
+        commandMap.put("info", new HelpCommand("help"));
+        commandMap.put("show", new ShowCommand("show"));
+//        commandMap.put("add", new Command());
+        commandMap.put("update", new UpdateCommand("update", collectionKeeper));
+//        commandMap.put("remove_by_id", new Command());
+//        commandMap.put("clear", new Command());
+//        commandMap.put("save", new Command());
+//        commandMap.put("execute_script", new Command());
+//        commandMap.put("exit", new Command());
+//        commandMap.put("remove_at", new Command());
+//        commandMap.put("remove_greater", new Command());
+//        commandMap.put("sort", new Command());
+//        commandMap.put("min_by_difficulty", new Command());
+//        commandMap.put("print_descending", new Command());
         List<String> allCommandsList = Arrays.asList("help", "info", "show", "add", "update", "remove_by_id", "clear", "save", "execute_script", "exit", "remove_at", "remove_greater", "sort", "min_by_difficulty", "print_descending");
         Set<String> allCommands = new HashSet<>(allCommandsList);
         List<String> elementCommandsList = Arrays.asList("add", "update", "remove_greater");
@@ -31,25 +46,25 @@ public class Keeper {
         Set<String> stringParamCommands = new HashSet<>(stringParamCommandsList);
 
         Scanner sc = new Scanner(System.in);
-        String nextLine = sc.nextLine();
-        while (!nextLine.equals("exit")) {
-            String[] potentialCommand = nextLine.split(" ",2);
-            //TODO: проверить что contains вернёт то, что надо. Есть сомнения по поводу ссылочности типа String
-            if (allCommands.contains(potentialCommand[0])) {
-                Command command = new Command(potentialCommand[0]); //тут записала команде имя
-                if(stringParamCommands.contains(command.getName())){
-                    command.setStringParam(potentialCommand[0]);
-                }
-                if (elementCommands.contains(command.getName())) {
-                    LabWork labWorkElement = readElement(sc);
-                    command.setLabWorkElement(labWorkElement);
-                }
-                System.out.println(collectionKeeper.runCommand(command));
+        String next = sc.next();
+        while (!next.equals("exit")) {
+            if(commandMap.containsKey(next)){
+                Command command = commandMap.get(next);
+                //функция от команды, которая кладёт в неё нужные аргументы
+                command.setIn(sc);
 
-            }else{
-                System.out.println("Вы ввели что-то непонятное");
+//                if(stringParamCommands.contains(command.getName())){
+//                    command.setStringParam();
+//                }
+//                if (elementCommands.contains(command.getName())) {
+//                    LabWork labWorkElement = readElement(sc);
+//                    command.setLabWorkElement(labWorkElement);
+//                }
+//                System.out.println(collectionKeeper.runCommand(command));
             }
-            nextLine = sc.next();
+            String[] potentialCommand = next.split(" ",2);
+//            //TODO: проверить что contains вернёт то, что надо. Есть сомнения по поводу ссылочности типа String
+            next = sc.next();
         }
         sc.close();
     }
