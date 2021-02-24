@@ -1,6 +1,8 @@
-package ru.senina.lab5;
+package ru.senina.lab5.command;
 
-public class ShowCommand extends Command{
+import ru.senina.lab5.CollectionKeeper;
+
+public class ShowCommand extends Command {
 
     CollectionKeeper collectionKeeper;
 

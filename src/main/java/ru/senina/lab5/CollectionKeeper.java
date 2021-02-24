@@ -2,6 +2,7 @@ package ru.senina.lab5;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import ru.senina.lab5.labwork.LabWork;
+import ru.senina.lab5.command.Command;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -53,5 +54,15 @@ public class CollectionKeeper {
 
     public String runCommand(Command command){
         return "Здесь надо дописать функцию для всех команд";
+    }
+
+    public String updateID(int id, LabWork element){
+        try{
+            list.set(id, element);
+            return "Элемент с индексом " + id + " успешно обновлён.";
+        }
+        catch (IndexOutOfBoundsException e){
+            return "Вы ввели неверный id";
+        }
     }
 }

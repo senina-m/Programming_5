@@ -1,6 +1,7 @@
 package ru.senina.lab5;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import ru.senina.lab5.command.*;
 import ru.senina.lab5.labwork.LabWork;
 
 import java.io.FileNotFoundException;
@@ -46,31 +47,62 @@ public class Keeper {
         Set<String> stringParamCommands = new HashSet<>(stringParamCommandsList);
 
         Scanner sc = new Scanner(System.in);
-        String next = sc.next();
-        while (!next.equals("exit")) {
-            if(commandMap.containsKey(next)){
-                Command command = commandMap.get(next);
-                //функция от команды, которая кладёт в неё нужные аргументы
-                command.setIn(sc);
-
-//                if(stringParamCommands.contains(command.getName())){
-//                    command.setStringParam();
-//                }
-//                if (elementCommands.contains(command.getName())) {
-//                    LabWork labWorkElement = readElement(sc);
-//                    command.setLabWorkElement(labWorkElement);
-//                }
-//                System.out.println(collectionKeeper.runCommand(command));
+        String next = sc.nextLine();
+        while (true) {
+            //TODO: проверить что contains вернёт то, что надо. Есть сомнения по поводу ссылочности типа String
+            if(commandMap.containsKey(next.split(" ")[0])){
+                Command command = commandMap.get(next.split(" ")[0]);
+                command.setArgs(Arrays.copyOfRange(next.split(" "), 1, next.length()));
+                if (command instanceof ElementNeed) {
+                    LabWork labWorkElement = readElement(sc);
+                    try{
+                        ((ElementNeed) command).setLabWorkElement(labWorkElement);
+                    }
+                    catch (TryAgainException e){
+                        //TODO: написать тут что-то
+                    }
+                }
+                System.out.println(collectionKeeper.runCommand(command));
             }
-            String[] potentialCommand = next.split(" ",2);
-//            //TODO: проверить что contains вернёт то, что надо. Есть сомнения по поводу ссылочности типа String
+
+            if(!next.equals("exit")){
+                sc.close();
+                System.exit(0);
+            }
             next = sc.next();
         }
-        sc.close();
     }
 
-    public LabWork readElement(Scanner sc){
-        //TODO: Написать метод читающий и запрашивающий элемент LabWork
+        public LabWork readElement(Scanner sc){
+        LabWork element = new LabWork();
+        System.out.println("Вы вызвали команду требующую ввода элемента коллекции типа LabWork. \n Введите id");
+        try{
+            element.setId(Long.parseLong(sc.next()));
+        }
+        catch (NumberFormatException e){
+            throw new TryAgainException("Вы ввели не число. Для повторного ввода введите команду update заново :)");
+        }
+        //TODO: Доделать этот метод
         return new LabWork();
     }
+
+    //"list" : [ {
+    //"id" : 1111,
+    //"name" : "element",
+    //"coordinates" : {
+    //"x" : 2,
+    //"y" : 3
+    //},
+    //"creationDate" : "2021-02-14T22:06:09.2031526",
+    //"minimalPoint" : 80.0,
+    //"description" : "my lovely Hori",
+    //"averagePoint" : 9,
+    //"difficulty" : "HOPELESS",
+    //"discipline" : {
+    //"name" : "Killing",
+    //"lectureHours" : 35,
+    //"practiceHours" : 65,
+    //"selfStudyHours" : 26
+    //}
+    //} ]
 }
