@@ -57,7 +57,6 @@ public class ParserTest {
                 "        \"selfStudyHours\" : 66\n" +
                 "      }\n" +
                 "    } ]}";
-        long id = 1111;
         String name = "element";
         Coordinates coordinates = new Coordinates(2, (long) 3);
         float minimalPoint = 80;
@@ -65,7 +64,7 @@ public class ParserTest {
         Integer averagePoint = 9;
         Difficulty difficulty = Difficulty.HOPELESS;
         Discipline discipline = new Discipline("Killing", (long) 35, (Integer) 65, 26);
-        LabWork labWork = new LabWork(id, name, coordinates, minimalPoint, description, averagePoint, difficulty, discipline);
+        LabWork labWork = new LabWork(name, coordinates, minimalPoint, description, averagePoint, difficulty, discipline);
         LinkedList<LabWork> list = new LinkedList<>();
         list.add(labWork);
         CollectionKeeper expectedCollectionKeeper = new CollectionKeeper(list);
@@ -79,7 +78,6 @@ public class ParserTest {
 
     @Test
     public void testFromObjectToJson() throws JsonProcessingException {
-        long id = 1111;
         String name = "element";
         Coordinates coordinates = new Coordinates(2, (long) 3);
         float minimalPoint = 80;
@@ -87,7 +85,7 @@ public class ParserTest {
         Integer averagePoint = 9;
         Difficulty difficulty = Difficulty.HOPELESS;
         Discipline discipline = new Discipline("Killing", (long) 35, (Integer) 65, 26);
-        LabWork labWork = new LabWork(id, name, coordinates, minimalPoint, description, averagePoint, difficulty, discipline);
+        LabWork labWork = new LabWork(name, coordinates, minimalPoint, description, averagePoint, difficulty, discipline);
         LinkedList<LabWork> list = new LinkedList<>();
         list.add(labWork);
         CollectionKeeper collectionKeeper = new CollectionKeeper(list);

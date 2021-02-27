@@ -2,6 +2,8 @@ package ru.senina.lab5;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import ru.senina.lab5.command.*;
+import ru.senina.lab5.labwork.Coordinates;
+import ru.senina.lab5.labwork.Discipline;
 import ru.senina.lab5.labwork.LabWork;
 
 import java.io.FileNotFoundException;
@@ -50,22 +52,21 @@ public class Keeper {
         String next = sc.nextLine();
         while (true) {
             //TODO: проверить что contains вернёт то, что надо. Есть сомнения по поводу ссылочности типа String
-            if(commandMap.containsKey(next.split(" ")[0])){
+            if (commandMap.containsKey(next.split(" ")[0])) {
                 Command command = commandMap.get(next.split(" ")[0]);
                 command.setArgs(Arrays.copyOfRange(next.split(" "), 1, next.length()));
                 if (command instanceof ElementNeed) {
                     LabWork labWorkElement = readElement(sc);
-                    try{
+                    try {
                         ((ElementNeed) command).setLabWorkElement(labWorkElement);
-                    }
-                    catch (TryAgainException e){
-                        //TODO: написать тут что-то
+                    } catch (TryAgainException e) {
+                        System.out.println(e.getMessage());
                     }
                 }
                 System.out.println(collectionKeeper.runCommand(command));
             }
 
-            if(!next.equals("exit")){
+            if (!next.equals("exit")) {
                 sc.close();
                 System.exit(0);
             }
@@ -73,15 +74,56 @@ public class Keeper {
         }
     }
 
-        public LabWork readElement(Scanner sc){
+    public LabWork readElement(Scanner sc) {
+        String whatToDoNextString = "\nTo try again run command again :)";
         LabWork element = new LabWork();
-        System.out.println("Вы вызвали команду требующую ввода элемента коллекции типа LabWork. \n Введите id");
-        try{
-            element.setId(Long.parseLong(sc.next()));
+        System.out.println("You run a command, which needs LabWork element to be entered.");
+
+        //ввод имени
+        System.out.println("Enter element's name.");
+        element.setName(sc.nextLine());
+
+        System.out.println("Enter coordinates. In first line x <= 74. In second y >= -47.");
+        try {
+            element.setCoordinates(new Coordinates(Integer.parseInt(sc.nextLine()), Long.parseLong(sc.nextLine())));
+        } catch (InvalidArgumentsException | NumberFormatException e) {
+            String message = (e instanceof InvalidArgumentsException) ? ((InvalidArgumentsException) e).getMessage() : "";
+            throw new TryAgainException("You have entered invalidate numbers." + message + whatToDoNextString);
         }
-        catch (NumberFormatException e){
-            throw new TryAgainException("Вы ввели не число. Для повторного ввода введите команду update заново :)");
+
+        System.out.println("Enter minimal point.");
+        try {
+            element.setMinimalPoint(Float.parseFloat(sc.nextLine()));
+        } catch (InvalidArgumentsException | NumberFormatException e) {
+            String message = (e instanceof InvalidArgumentsException) ? ((InvalidArgumentsException) e).getMessage() : "";
+            throw new TryAgainException("You have entered invalidate number." + message + whatToDoNextString);
         }
+
+        System.out.println("Enter element description.");
+        try {
+            element.setDescription(sc.nextLine());
+        } catch (InvalidArgumentsException e) {
+            throw new TryAgainException("You have entered wrong description." + e.getMessage());
+        }
+
+        System.out.println("Enter average point.");
+        try {
+            element.setAveragePoint(Integer.parseInt(sc.nextLine()));
+        } catch (InvalidArgumentsException | NumberFormatException e) {
+            String message = (e instanceof InvalidArgumentsException) ? ((InvalidArgumentsException) e).getMessage() : "";
+            throw new TryAgainException("You have entered invalidate number." + message + whatToDoNextString);
+        }
+
+//        System.out.println("Enter one discipline of following list:");
+//        System.out.println((Discipline().toString());
+//        try {
+//            element.setAveragePoint(Integer.parseInt(sc.nextLine()));
+//        } catch (InvalidArgumentsException | NumberFormatException e) {
+//            String message = (e instanceof InvalidArgumentsException) ? ((InvalidArgumentsException) e).getMessage() : "";
+//            throw new TryAgainException("You have entered invalidate number." + message + whatToDoNextString);
+//        }
+
+
         //TODO: Доделать этот метод
         return new LabWork();
     }

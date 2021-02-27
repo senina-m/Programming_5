@@ -8,6 +8,7 @@ public class Main {
 
     public static void main(String[] args) throws FileNotFoundException, JsonProcessingException {
         //TODO: make reading from environment variables
+        //TODO: translate all massages
         //filepath = System.getenv("SENINA_PATH");
         String filePath = "C:\\Users\\senin\\Desktop\\ITMO\\Programming\\Programming_5Lab\\src\\main\\resources\\inputData.json";
         Keeper keeper = new Keeper(filePath);
