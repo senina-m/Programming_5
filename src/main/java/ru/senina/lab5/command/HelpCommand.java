@@ -1,12 +1,29 @@
 package ru.senina.lab5.command;
 
-public class HelpCommand extends Command {
-    public HelpCommand(String name) {
-        super(name);
+public class HelpCommand extends CommandWithoutArgs {
+    public HelpCommand() {
+        super("help");
     }
 
     @Override
-    public String run() {
-        return null;
+    public String doRun() {
+        String commands = "help : вывести справку по доступным командам \n" +
+                    "info : вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)\n" +
+                    "show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении\n" +
+                    "add {element} : добавить новый элемент в коллекцию\n" +
+                    "update id {element} : обновить значение элемента коллекции, id которого равен заданному\n" +
+                    "remove_by_id id : удалить элемент из коллекции по его id\n" +
+                    "clear : очистить коллекцию\n" +
+                    "save : сохранить коллекцию в файл\n" +
+                    "execute_script file_name : считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.\n" +
+                    "exit : завершить программу (без сохранения в файл)\n" +
+                    "remove_at index : удалить элемент, находящийся в заданной позиции коллекции (index)\n" +
+                    "remove_greater {element} : удалить из коллекции все элементы, превышающие заданный\n" +
+                    "sort : отсортировать коллекцию в естественном порядке\n" +
+                    "min_by_difficulty : вывести любой объект из коллекции, значение поля difficulty которого является минимальным\n" +
+                    "filter_by_description description : вывести элементы, значение поля description которых равно заданному\n" +
+                    "print_descending : вывести элементы коллекции в порядке убывания\n";
+        //TODO: Подумать не надо ли собирать инфу о всех командах автоматически или нормально оставить её отдельное написание здесь.
+        return "You entered help command. The full list of commands is here: \n" + commands;
     }
 }

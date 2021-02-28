@@ -9,7 +9,7 @@ import java.util.Objects;
 public class LabWork {
     private final java.time.LocalDateTime creationDate = java.time.LocalDateTime.now();
     ; //Поле не может быть null, Значение этого поля должно генерироваться автоматически https://javadevblog.com/polnoe-rukovodstvo-po-java-8-date-time-api-primery-localdate-instant-localdatetime-parse-i-format.html
-    private Long id = (long) Objects.hash(creationDate); //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным,
+    private Long id = Math.abs((long) Objects.hash(creationDate)); //Поле не может быть null, Значение поля должно быть больше 0, Значение этого поля должно быть уникальным,
     // Значение этого поля должно генерироваться автоматически
 
     private String name; //Поле не может быть null, Строка не может быть пустой
@@ -75,7 +75,7 @@ public class LabWork {
         return minimalPoint;
     }
 
-    public void setMinimalPoint(float minimalPoint) {
+    public void setMinimalPoint(float minimalPoint) throws InvalidArgumentsException{
         if(minimalPoint > 0){
             this.minimalPoint = minimalPoint;
         }else {
@@ -83,12 +83,8 @@ public class LabWork {
         }
     }
 
-    public void setCoordinates(Coordinates coordinates) throws InvalidArgumentsException {
-        if(coordinates.getX() <= 74 && coordinates.getY() >= -47){
-            this.coordinates = coordinates;
-        }else {
-            throw new InvalidArgumentsException("Coordinates value is wrong.");
-        }
+    public void setCoordinates(Coordinates coordinates){
+        this.coordinates = coordinates;
     }
 
     public String getDescription() {
@@ -107,7 +103,7 @@ public class LabWork {
         return averagePoint;
     }
 
-    public void setAveragePoint(Integer averagePoint) {
+    public void setAveragePoint(Integer averagePoint) throws InvalidArgumentsException{
         if (averagePoint != null && averagePoint > 0) {
             this.description = description;
         } else {
@@ -122,6 +118,20 @@ public class LabWork {
 
     public void setDifficulty(Difficulty difficulty) {
         this.difficulty = difficulty;
+    }
+
+    public void setDifficulty(String str) throws InvalidArgumentsException{
+        //TODO: How to write it better?
+        boolean rightString = false;
+        for(Difficulty difficulty : Difficulty.values()){
+            if(str.equals(difficulty.toString())){
+                this.difficulty = difficulty;
+                rightString = true;
+            }
+        }
+        if(!rightString){
+            throw new InvalidArgumentsException("There is now such value for difficulty.");
+        }
     }
 
     public Discipline getDiscipline() {

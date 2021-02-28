@@ -1,5 +1,7 @@
 package ru.senina.lab5.labwork;
 
+import ru.senina.lab5.InvalidArgumentsException;
+
 import java.util.Objects;
 
 public class Discipline {
@@ -35,8 +37,12 @@ public class Discipline {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setName(String name) throws InvalidArgumentsException {
+        if (name != null && name.length() != 0) {
+            this.name = name;
+        } else {
+            throw new InvalidArgumentsException("Discipline's name can't be null or empty line.");
+        }
     }
 
     public long getLectureHours() {

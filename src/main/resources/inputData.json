@@ -1,24 +1,36 @@
 {
-"time" : "2021.02.14 AD at 22:06:09 MSK",
 "list" : [ {
-"id" : 1111,
 "name" : "element",
 "coordinates" : {
 "x" : 2,
 "y" : 3
 },
-"creationDate" : "2021-02-14T22:06:09.2031526",
 "minimalPoint" : 80.0,
-"description" : "my lovely Hori",
+"description" : "KT subject",
 "averagePoint" : 9,
 "difficulty" : "HOPELESS",
 "discipline" : {
-"name" : "Killing",
-"lectureHours" : 35,
-"practiceHours" : 65,
-"selfStudyHours" : 26
+"name" : "Algosy",
+"lectureHours" : 30,
+"practiceHours" : 55,
+"selfStudyHours" : 10
 }
-} ],
-"type" : "LinkedList",
-"amountOfElements" : 1
+},
+  {
+    "name" : "element",
+    "coordinates" : {
+      "x" : 55,
+      "y" : 67
+    },
+    "minimalPoint" : 60.0,
+    "description" : "VT subject",
+    "averagePoint" : 7,
+    "difficulty" : "VERY_EASY",
+    "discipline" : {
+      "name" : "OPD",
+      "lectureHours" : 35,
+      "practiceHours" : 0,
+      "selfStudyHours" : 10000
+    }
+  }]
 }

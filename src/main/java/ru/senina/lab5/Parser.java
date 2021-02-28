@@ -4,10 +4,12 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import ru.senina.lab5.labwork.LabWork;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Parser {
@@ -33,9 +35,29 @@ public class Parser {
         return resultString.toString();
     }
 
-    public void fromJsonToFile(String filename, String json){}
-    public String fromCollectionKeeperToJson(CollectionKeeper collectionKeeper){
-        return "Пока так чтобы не ругулось";
+    public void fromJsonToFile(String filename, String json) throws IOException {
+        FileWriter writer = new FileWriter(new File(filename));
+        writer.write(json);
+    }
+    public String fromCollectionKeeperToJson(CollectionKeeper collectionKeeper) throws JsonProcessingException {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm a z");
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        objectMapper.setDateFormat(df);
+        return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(collectionKeeper);
+    }
+
+    public String fromCollectionKeeperElementsToJson(CollectionKeeper collectionKeeper) throws JsonProcessingException {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm a z");
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        objectMapper.setDateFormat(df);
+        StringBuilder resultString  = new StringBuilder();
+        LinkedList<LabWork> list = collectionKeeper.getList();
+        for(int i = 0; i < list.size(); i++){
+            resultString.append("\nElement ").append(i + 1).append(":\n").append(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(list.get(i)));
+        }
+        return resultString.toString();
     }
 
 }

@@ -1,13 +1,17 @@
 package ru.senina.lab5.command;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import ru.senina.lab5.CollectionKeeper;
+import ru.senina.lab5.Parser;
 
-public class ShowCommand extends Command {
+public class ShowCommand extends CommandWithoutArgs {
 
-    CollectionKeeper collectionKeeper;
+    private CollectionKeeper collectionKeeper;
+    private Parser parser = new Parser();
 
-    public ShowCommand(String name) {
-        super(name);
+    public ShowCommand(CollectionKeeper collectionKeeper) {
+        super("show");
+        this.collectionKeeper =  collectionKeeper;
     }
 
     public CollectionKeeper getCollectionKeeper() {
@@ -19,9 +23,10 @@ public class ShowCommand extends Command {
     }
 
     @Override
-    public String run() {
-        return "Эта коллекция была создана: " + collectionKeeper.getTime() + "\n"
-                + "Тип коллекции: " + collectionKeeper.getType() + "\n"
-                + "Колличество элементов в коллекции: " + collectionKeeper.getAmountOfElements() + "\n";
+    protected String doRun() throws JsonProcessingException {
+        System.out.println("You have entered show command.");
+        Parser parser = new Parser();
+        parser.fromCollectionKeeperElementsToJson(collectionKeeper);
+        return parser.fromCollectionKeeperElementsToJson(collectionKeeper);
     }
 }

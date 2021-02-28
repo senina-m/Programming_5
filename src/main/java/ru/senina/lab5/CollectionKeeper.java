@@ -52,17 +52,18 @@ public class CollectionKeeper {
         return dateFormat.format(time);
     }
 
-    public String runCommand(Command command){
-        return "Здесь надо дописать функцию для всех команд";
+    public String updateID(long id, LabWork labWork){
+        for(int i=0; i < list.size(); i++){
+           if(list.get(i).getId() == id){
+               list.set(i, labWork);
+               return "Element with id: " + id + " was successfully updated.";
+           }
+        }
+        return "There is no element with id: " + id + " in collection.";
     }
 
-    public String updateID(int id, LabWork element){
-        try{
-            list.set(id, element);
-            return "Элемент с индексом " + id + " успешно обновлён.";
-        }
-        catch (IndexOutOfBoundsException e){
-            return "Вы ввели неверный id";
-        }
+    public String add(LabWork element) {
+        list.add(element);
+        return "Element with id: " + element.getId() + "was successfully added.";
     }
 }
