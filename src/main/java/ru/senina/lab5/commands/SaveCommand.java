@@ -20,7 +20,6 @@ public class SaveCommand extends CommandWithoutArgs {
     @Override
     protected String doRun(){
         try {
-            //TODO: проверять доступ к файлу
             parser.writeStringToFile(filename, parser.fromCollectionKeeperToJson(collectionKeeper));
             return "Collection was successfully saved to " + filename + " file.";
         } catch (IOException e){

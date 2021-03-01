@@ -96,12 +96,9 @@ public class CollectionKeeper {
     public String sort() {
         list.sort(comparator);
         return "Collection was successfully sort.";
-        //TODO: Могут ли тут быть какие-то ошибки?
     }
 
     public String removeGreater(LabWork element) {
-        //TODO: исправить этот ужасный говнокод
-        //TODO: Могут ли тут быть какие-то ошибки?
         List<Integer> indexToDelete = new ArrayList<>();
         for(int i = 0; i < list.size(); i++){
             if(comparator.compare(list.get(i), element) > 0){

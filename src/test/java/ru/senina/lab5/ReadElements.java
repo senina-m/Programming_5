@@ -8,6 +8,7 @@ import ru.senina.lab5.labwork.Discipline;
 import ru.senina.lab5.labwork.LabWork;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.LinkedList;
 
 public class ReadElements {
@@ -17,7 +18,7 @@ public class ReadElements {
         Parser parser = new Parser();
         try {
             CollectionKeeper collectionKeeper = parser.fromJsonToCollectionKeeper(parser.fromFileToString("C:\\Users\\senin\\Desktop\\ITMO\\Programming\\Programming_5\\src\\main\\resources\\inputData.json"));
-        } catch (InvalidArgumentsException e) {
+        } catch (InvalidArgumentsException | IOException e) {
             System.out.println(e.getMessage());
         }
 

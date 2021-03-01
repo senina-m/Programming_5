@@ -7,22 +7,22 @@ public class HelpCommand extends CommandWithoutArgs {
 
     @Override
     public String doRun() {
-        String commands = "help : вывести справку по доступным командам \n" +
-                    "info : вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)\n" +
+        String commands = "help : display help for available commands \n" +
+                    "info : print information about the collection (type, initialization date, number of elements, etc.) to the standard output stream\n" +
                     "show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении\n" +
-                    "add {element} : добавить новый элемент в коллекцию\n" +
-                    "update id {element} : обновить значение элемента коллекции, id которого равен заданному\n" +
-                    "remove_by_id id : удалить элемент из коллекции по его id\n" +
-                    "clear : очистить коллекцию\n" +
-                    "save : сохранить коллекцию в файл\n" +
-                    "execute_script file_name : считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.\n" +
-                    "exit : завершить программу (без сохранения в файл)\n" +
-                    "remove_at index : удалить элемент, находящийся в заданной позиции коллекции (index)\n" +
-                    "remove_greater {element} : удалить из коллекции все элементы, превышающие заданный\n" +
-                    "sort : отсортировать коллекцию в естественном порядке\n" +
-                    "min_by_difficulty : вывести любой объект из коллекции, значение поля difficulty которого является минимальным\n" +
-                    "filter_by_description description : вывести элементы, значение поля description которых равно заданному\n" +
-                    "print_descending : вывести элементы коллекции в порядке убывания\n";
+                    "add {element} : add new element to collection\n" +
+                    "update id {element} : update the value of the collection element whose id is equal to the given\n" +
+                    "remove_by_id id : remove an item from the collection by its id\n" +
+                    "clear : clear collection\n" +
+                    "save : save collection to file\n" +
+                    "execute_script file_name : read and execute the script from the specified file. The script contains commands in the same form in which the user enters them interactively.\n" +
+                    "exit : end the program (without saving to file)\n" +
+                    "remove_at index : remove the element at the given collection position (index)\n" +
+                    "remove_greater {element} : remove all items from the collection that are greater than the specified one\n" +
+                    "sort : sort the collection in natural order\n" +
+                    "min_by_difficulty : remove any object from the collection with the minimum difficulty value\n" +
+                    "filter_by_description description : display elements whose description field value is equal to the given one\n" +
+                    "print_descending : display the elements of the collection in descending order\n";
         //TODO: Подумать не надо ли собирать инфу о всех командах автоматически или нормально оставить её отдельное написание здесь.
         return "You entered help command. The full list of commands is here: \n" + commands;
     }

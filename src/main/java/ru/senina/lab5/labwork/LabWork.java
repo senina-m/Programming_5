@@ -33,8 +33,6 @@ public class LabWork {
         this.discipline = discipline;
     }
 
-    //TODO: validation methods for each field
-
     public Long getId() {
         return id;
     }
@@ -121,7 +119,6 @@ public class LabWork {
     }
 
     public void setDifficulty(String str) throws InvalidArgumentsException{
-        //TODO: How to write it better?
         boolean rightString = false;
         for(Difficulty difficulty : Difficulty.values()){
             if(str.equals(difficulty.toString())){
