@@ -1,19 +1,12 @@
-package ru.senina.lab5.command;
+package ru.senina.lab5.commands;
 
 import ru.senina.lab5.CollectionKeeper;
 
 public class InfoCommand extends CommandWithoutArgs {
     CollectionKeeper collectionKeeper;
 
-    public InfoCommand() {
+    public InfoCommand(CollectionKeeper collectionKeeper) {
         super("info");
-    }
-
-    public CollectionKeeper getCollectionKeeper() {
-        return collectionKeeper;
-    }
-
-    public void setCollectionKeeper(CollectionKeeper collectionKeeper) {
         this.collectionKeeper = collectionKeeper;
     }
 

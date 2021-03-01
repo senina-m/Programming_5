@@ -15,7 +15,40 @@
 "practiceHours" : 55,
 "selfStudyHours" : 10
 }
-},
+}, {
+    "name" : "element",
+    "coordinates" : {
+      "x" : 55,
+      "y" : 67
+    },
+    "minimalPoint" : 60.0,
+    "description" : "VT subject",
+    "averagePoint" : 7,
+    "difficulty" : "VERY_HARD",
+    "discipline" : {
+      "name" : "OPD",
+      "lectureHours" : 35,
+      "practiceHours" : 0,
+      "selfStudyHours" : 10000
+    }
+  },
+  {
+    "name" : "element",
+    "coordinates" : {
+      "x" : 55,
+      "y" : 67
+    },
+    "minimalPoint" : 60.0,
+    "description" : "VT subject",
+    "averagePoint" : 7,
+    "difficulty" : "NORMAL",
+    "discipline" : {
+      "name" : "OPD",
+      "lectureHours" : 35,
+      "practiceHours" : 0,
+      "selfStudyHours" : 5
+    }
+  },
   {
     "name" : "element",
     "coordinates" : {
@@ -30,7 +63,24 @@
       "name" : "OPD",
       "lectureHours" : 35,
       "practiceHours" : 0,
-      "selfStudyHours" : 10000
+      "selfStudyHours" : 1
+    }
+  },
+  {
+    "name" : "element",
+    "coordinates" : {
+      "x" : 55,
+      "y" : 67
+    },
+    "minimalPoint" : 60.0,
+    "description" : "VT subject",
+    "averagePoint" : 7,
+    "difficulty" : "INSANE",
+    "discipline" : {
+      "name" : "OPD",
+      "lectureHours" : 35,
+      "practiceHours" : 0,
+      "selfStudyHours" : 50
     }
   }]
 }

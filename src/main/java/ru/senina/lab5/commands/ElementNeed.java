@@ -1,4 +1,4 @@
-package ru.senina.lab5.command;
+package ru.senina.lab5.commands;
 
 import ru.senina.lab5.labwork.LabWork;
 

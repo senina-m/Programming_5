@@ -1,7 +1,6 @@
-package ru.senina.lab5.command;
+package ru.senina.lab5.commands;
 
 import ru.senina.lab5.CollectionKeeper;
-import ru.senina.lab5.InvalidArgumentsException;
 import ru.senina.lab5.labwork.LabWork;
 
 public class AddCommand extends CommandWithoutArgs implements ElementNeed{

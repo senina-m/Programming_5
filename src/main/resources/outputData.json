@@ -1,74 +1,57 @@
-//TODO: make reading from environment variables
-        //filepath = System.getenv("SENINA_PATH");
-        String filePath = "C:\\Users\\senin\\Desktop\\ITMO\\Programming\\Programming_5Lab\\src\\main\\resources\\inputData.json";
-
-        ru.senina.lab5.Parser parser = new ru.senina.lab5.Parser();
-        ru.senina.lab5.CollectionKeeper collectionKeeper = parser.fromJsonToCollectionKeeper(parser.fromFileToString(filePath));
-
-        Scanner sc = new Scanner(System.in);
-        boolean exit = false;
-        String[] commands = new String[]{"help : вывести справку по доступным командам",
-                "info : вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)",
-                "show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении",
-                "add {element} : добавить новый элемент в коллекцию",
-                "update id {element} : обновить значение элемента коллекции, id которого равен заданному",
-                "remove_by_id id : удалить элемент из коллекции по его id",
-                "clear : очистить коллекцию",
-                "save : сохранить коллекцию в файл",
-                "execute_script file_name : считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.",
-                "exit : завершить программу (без сохранения в файл)",
-                "remove_at index : удалить элемент, находящийся в заданной позиции коллекции (index)",
-                "remove_greater {element} : удалить из коллекции все элементы, превышающие заданный",
-                "sort : отсортировать коллекцию в естественном порядке",
-                "min_by_difficulty : вывести любой объект из коллекции, значение поля difficulty которого является минимальным",
-                "filter_by_description description : вывести элементы, значение поля description которых равно заданному",
-                "print_descending : вывести элементы коллекции в порядке убывания"};
-
-        //Тут обрабатываю команды
-        String newLine = "";
-        while (!exit) {
-            newLine = sc.next();
-            //Help помощь
-            if (newLine.equals("help")) {
-                for (String line : commands) {
-                    System.out.println(line);
-                }
-            }
-
-            //info вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)
-            if (newLine.equals("info")) {
-                System.out.println(collectionKeeper.getType());
-                System.out.println(collectionKeeper.getTime());
-                System.out.println(collectionKeeper.getAmountOfElements());
-//                //TODO: Do we need something else???
-            }
-
-            if (newLine.equals("show")){
-
-            }
-
-            //Exit выход
-            if (newLine.equals("exit")) {
-                exit = true;
-            }
-        }
-        sc.close();
-
-
-
-        //Обратобать команды
-        // info : вывести в стандартный поток вывода информацию о коллекции (тип, дата инициализации, количество элементов и т.д.)
-        //show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении
-        //add {element} : добавить новый элемент в коллекцию
-        //update id {element} : обновить значение элемента коллекции, id которого равен заданному
-        //remove_by_id id : удалить элемент из коллекции по его id
-        //clear : очистить коллекцию
-        //save : сохранить коллекцию в файл
-        //execute_script file_name : считать и исполнить скрипт из указанного файла. В скрипте содержатся команды в таком же виде, в котором их вводит пользователь в интерактивном режиме.
-        //
-        //remove_at index : удалить элемент, находящийся в заданной позиции коллекции (index)
-        //remove_greater {element} : удалить из коллекции все элементы, превышающие заданный
-        //sort : отсортировать коллекцию в естественном порядке
-        //min_by_difficulty : вывести любой объект из коллекции, значение поля difficulty которого является минимальным
-        //filter_by_description description : вывести элементы, значение поля description которых равно заданному
-        //print_descending : вывести элементы коллекции в порядке убывания
+{
+  "list" : [ {
+    "creationDate" : "2021-03-01T13:32:53.3527715",
+    "id" : 295515307,
+    "name" : "element",
+    "coordinates" : {
+      "x" : 2,
+      "y" : 3
+    },
+    "minimalPoint" : 80.0,
+    "description" : "KT subject",
+    "averagePoint" : 9,
+    "difficulty" : "HOPELESS",
+    "discipline" : {
+      "name" : "Algosy",
+      "lectureHours" : 30,
+      "practiceHours" : 55,
+      "selfStudyHours" : 10
+    }
+  }, {
+    "creationDate" : "2021-03-01T13:32:53.3537712",
+    "id" : 296610695,
+    "name" : "element",
+    "coordinates" : {
+      "x" : 55,
+      "y" : 67
+    },
+    "minimalPoint" : 60.0,
+    "description" : "VT subject",
+    "averagePoint" : 7,
+    "difficulty" : "VERY_EASY",
+    "discipline" : {
+      "name" : "OPD",
+      "lectureHours" : 35,
+      "practiceHours" : 0,
+      "selfStudyHours" : 10000
+    }
+  }, {
+    "creationDate" : "2021-03-01T13:33:20.2585466",
+    "id" : 841768746,
+    "name" : "new",
+    "coordinates" : {
+      "x" : 0,
+      "y" : 0
+    },
+    "minimalPoint" : 1.0,
+    "description" : "new",
+    "averagePoint" : 1,
+    "difficulty" : "HOPELESS",
+    "discipline" : {
+      "name" : "new",
+      "lectureHours" : 1,
+      "practiceHours" : 1,
+      "selfStudyHours" : 1
+    }
+  } ]
+}

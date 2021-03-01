@@ -1,8 +1,6 @@
 package ru.senina.lab5;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.junit.Test;
 import ru.senina.lab5.labwork.Coordinates;
 import ru.senina.lab5.labwork.Difficulty;
@@ -10,10 +8,7 @@ import ru.senina.lab5.labwork.Discipline;
 import ru.senina.lab5.labwork.LabWork;
 
 import java.io.FileNotFoundException;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.LinkedList;
-import java.util.Scanner;
 
 public class ReadElements {
 
@@ -55,7 +50,7 @@ public class ReadElements {
         list.add(labWork3);
         list.add(labWork4);
         CollectionKeeper collectionKeeper = new CollectionKeeper(list);
-        System.out.println(parser.fromCollectionKeeperElementsToJson(collectionKeeper));
+        System.out.println(parser.fromCollectionKeeperToJsonElements(collectionKeeper));
     }
 
 }

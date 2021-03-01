@@ -35,9 +35,11 @@ public class Parser {
         return resultString.toString();
     }
 
-    public void fromJsonToFile(String filename, String json) throws IOException {
-        FileWriter writer = new FileWriter(new File(filename));
-        writer.write(json);
+    public void writeStringToFile(String filename, String str) throws IOException {
+        PrintWriter writer = new PrintWriter(new FileWriter(filename));
+        writer.print("");
+        writer.print(str);
+        writer.close();
     }
     public String fromCollectionKeeperToJson(CollectionKeeper collectionKeeper) throws JsonProcessingException {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm a z");
@@ -47,7 +49,7 @@ public class Parser {
         return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(collectionKeeper);
     }
 
-    public String fromCollectionKeeperElementsToJson(CollectionKeeper collectionKeeper) throws JsonProcessingException {
+    public String fromCollectionKeeperToJsonElements(CollectionKeeper collectionKeeper) throws JsonProcessingException {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm a z");
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
@@ -60,4 +62,11 @@ public class Parser {
         return resultString.toString();
     }
 
+    public String fromElementToString(LabWork element) throws JsonProcessingException {
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm a z");
+        objectMapper.registerModule(new JavaTimeModule());
+        objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
+        objectMapper.setDateFormat(df);
+            return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(element);
+    }
 }

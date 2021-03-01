@@ -1,9 +1,4 @@
-package ru.senina.lab5.command;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import ru.senina.lab5.labwork.LabWork;
-
-import java.util.Scanner;
+package ru.senina.lab5.commands;
 
 public abstract class Command {
     private final String name;
@@ -24,12 +19,12 @@ public abstract class Command {
         return name;
     }
 
-    public String run() throws JsonProcessingException {
+    public String run(){
         validateArguments();
         return doRun();
     }
 
-    protected abstract String doRun() throws JsonProcessingException;
+    protected abstract String doRun();
 
     public abstract void validateArguments();
 

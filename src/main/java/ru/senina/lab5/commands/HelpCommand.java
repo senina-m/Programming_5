@@ -1,4 +1,4 @@
-package ru.senina.lab5.command;
+package ru.senina.lab5.commands;
 
 public class HelpCommand extends CommandWithoutArgs {
     public HelpCommand() {
