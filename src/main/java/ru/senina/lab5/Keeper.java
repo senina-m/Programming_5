@@ -33,8 +33,8 @@ public class Keeper {
             File f = new File(filename);
             collectionKeeper = parser.fromJsonToCollectionKeeper(parser.fromFileToString(filename));
         } catch (InvalidArgumentsException | NullPointerException | IOException e) {
-            System.out.println("Filename is wrong. Collection will be empty.");
-            collectionKeeper = new CollectionKeeper(new LinkedList<LabWork>());
+            System.out.println("Filename is wrong. Run program again with correct filename.");
+
         }
 
         Map<String, Command> commandMap = new HashMap<>();
