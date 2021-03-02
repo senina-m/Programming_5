@@ -1,6 +1,6 @@
 add
 new
-4
+76
 0
 2
 new
@@ -11,5 +11,4 @@ new
 3
 3
 show
-execute_script C:\Users\senin\Desktop\ITMO\Programming\Programming_5\src\main\resources\script.txt
 exit

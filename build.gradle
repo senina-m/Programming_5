@@ -6,6 +6,9 @@ plugins {
 group 'ru.senina.ifmo'
 version '1.0-SNAPSHOT'
 
+targetCompatibility = 1.8
+sourceCompatibility = 1.8
+
 repositories {
     mavenCentral()
 }
@@ -24,11 +27,13 @@ test {
     useJUnitPlatform()
 }
 
-//mainClassName = "ru.senina.lab5.Main"
-shadowJar {
+jar {
     manifest {
         attributes 'Main-Class': "ru.senina.lab5.Main"
     }
 }
 
+javadoc {
+    options.encoding = 'UTF-8'
+}
 

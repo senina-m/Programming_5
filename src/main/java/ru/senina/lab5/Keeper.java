@@ -10,20 +10,30 @@ import java.io.*;
 import java.nio.file.Files;
 import java.util.*;
 
+/**
+ * Class to deal with input and output and keep CollectionKeeper class instance.
+ */
 public class Keeper {
-    private String filename = "resources/data.json";
+    private String filename;
     private CollectionKeeper collectionKeeper;
 
+    /**
+     * @param filename the path to file from which we read and to which we write collection data
+     */
     public Keeper(String filename) {
         this.filename = filename;
     }
 
-    public void start() throws IOException {
+    /**
+     * Method to start a new collection and System.in reader
+     */
+    public void start(){
         Parser parser = new Parser();
         try {
-            collectionKeeper = parser.fromJsonToCollectionKeeper(parser.fromFileToString(filename));
-        } catch (InvalidArgumentsException | IOException e) {
-            System.out.println(e.getMessage() + " Collection will be empty.");
+            File f = new File(filename);
+                collectionKeeper = parser.fromJsonToCollectionKeeper(parser.fromFileToString(filename));
+        } catch (InvalidArgumentsException | NullPointerException | IOException e) {
+            System.out.println("Filename is wrong. Collection will be empty.");
             collectionKeeper = new CollectionKeeper(new LinkedList<LabWork>());
         }
 
@@ -42,10 +52,22 @@ public class Keeper {
         commandMap.put("min_by_difficulty", new MinByDifficultyCommand(collectionKeeper, parser));
         commandMap.put("filter_by_description", new FilterByDescriptionCommand(collectionKeeper, parser));
         commandMap.put("print_descending", new PrintDescendingCommand(collectionKeeper, parser));
-        terminal(parser, commandMap, "no file", 0);
+        try {
+            terminal(parser, commandMap, "no file", 0);
+        }catch (IOException e){
+            throw new InvalidArgumentsException("You have entered wrong file name. Try the command again.");
+        }
 
     }
 
+    /**
+     *
+     * @param parser Parser instance
+     * @param commandMap Map of all commands from string command to Command instance
+     * @param filename file to execute script
+     * @param level recursion level
+     * @throws IOException throws if file has a wrong name
+     */
     public void terminal(Parser parser, Map<String, Command> commandMap, String filename, int level) throws IOException {
         if(level > 10 ){
             System.out.println("You can't execute file recursively more then 10 times! The programme will be finished!");
@@ -60,6 +82,7 @@ public class Keeper {
 
         while (true) {
             try {
+                System.out.print("> ");
                 String[] line = br.readLine().split(" ");
                 if (commandMap.containsKey(line[0])) {
                     boolean validCommand = true;
@@ -115,7 +138,7 @@ public class Keeper {
                                 exit = true;
                             } catch (InvalidArgumentsException e) {
                                 System.out.println("You have entered invalidate value." + e.getMessage() + "\nDo you want to exit from command? (yes/no)");
-                                if (br.readLine().equals("yes")) {
+                                if (br.readLine().equals("yes") && !filename.equals("no file")) {
                                     exit = true;
                                     commandIsReady = false;
                                     System.out.println("You have exit from previous command.");
@@ -124,7 +147,7 @@ public class Keeper {
                                 }
                             } catch (NumberFormatException e) {
                                 System.out.println("You have entered wrong type value." + "\nDo you want to exit from command? (yes/no)");
-                                if (br.readLine().equals("yes")) {
+                                if (br.readLine().equals("yes") || !filename.equals("no file")) {
                                     exit = true;
                                     commandIsReady = false;
                                     System.out.println("You have exit from previous command.");

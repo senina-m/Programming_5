@@ -2,6 +2,9 @@ package ru.senina.lab5.commands;
 
 import ru.senina.lab5.CollectionKeeper;
 
+/**
+ * Command prints information about the collection (type, initialization date, number of elements, etc.) to the standard output stream
+ */
 public class InfoCommand extends CommandWithoutArgs {
     CollectionKeeper collectionKeeper;
 

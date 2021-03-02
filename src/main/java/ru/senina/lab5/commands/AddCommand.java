@@ -3,6 +3,9 @@ package ru.senina.lab5.commands;
 import ru.senina.lab5.CollectionKeeper;
 import ru.senina.lab5.labwork.LabWork;
 
+/**
+ * Command adds new element to collection
+ */
 public class AddCommand extends CommandWithoutArgs implements ElementNeed{
     CollectionKeeper collectionKeeper;
     private LabWork element;

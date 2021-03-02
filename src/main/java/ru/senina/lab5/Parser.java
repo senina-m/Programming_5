@@ -13,22 +13,35 @@ import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 import java.util.Scanner;
 
+/**
+ * Class that works with json and output
+ */
 public class Parser {
     public static ObjectMapper objectMapper = new ObjectMapper();
 
     public Parser() {
     }
 
+    /**
+     *
+     * @param json json string
+     * @return CollectionKeeper instance with fields serialized from json
+     * @throws JsonProcessingException if something got wrong with json
+     */
     public CollectionKeeper fromJsonToCollectionKeeper(String json) throws JsonProcessingException {
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
         return objectMapper.readValue(json, CollectionKeeper.class);
     }
 
+    /**
+     * @param path
+     * @return
+     * @throws IOException
+     */
     public String fromFileToString(String path) throws IOException {
             StringBuilder resultString = new StringBuilder();
             File f = new File(path);
-//            if (f.exists() && !f.isDirectory() && Files.isReadable(f.toPath())) {
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(path)));
             String line = br.readLine();
             while (line != null) {
@@ -37,9 +50,6 @@ public class Parser {
             }
             br.close();
             return resultString.toString();
-//            } else {
-//                throw new InvalidFileException("File doesn't exist is a directory or isn't readable.");
-//            }
     }
 
     public void writeStringToFile(String filename, String str) throws IOException{

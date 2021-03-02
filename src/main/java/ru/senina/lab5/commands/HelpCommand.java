@@ -1,5 +1,8 @@
 package ru.senina.lab5.commands;
 
+/**
+ * Command displays help for available commands
+ */
 public class HelpCommand extends CommandWithoutArgs {
     public HelpCommand() {
         super("help");
@@ -9,7 +12,7 @@ public class HelpCommand extends CommandWithoutArgs {
     public String doRun() {
         String commands = "help : display help for available commands \n" +
                     "info : print information about the collection (type, initialization date, number of elements, etc.) to the standard output stream\n" +
-                    "show : вывести в стандартный поток вывода все элементы коллекции в строковом представлении\n" +
+                    "show : print to standard output all elements of the collection in string representation\n" +
                     "add {element} : add new element to collection\n" +
                     "update id {element} : update the value of the collection element whose id is equal to the given\n" +
                     "remove_by_id id : remove an item from the collection by its id\n" +

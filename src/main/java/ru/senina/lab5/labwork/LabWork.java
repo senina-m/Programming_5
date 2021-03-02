@@ -6,6 +6,9 @@ import ru.senina.lab5.InvalidArgumentsException;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+/**
+ * Class an element of collection
+ */
 public class LabWork {
     private final java.time.LocalDateTime creationDate = java.time.LocalDateTime.now();
     ; //Поле не может быть null, Значение этого поля должно генерироваться автоматически https://javadevblog.com/polnoe-rukovodstvo-po-java-8-date-time-api-primery-localdate-instant-localdatetime-parse-i-format.html
@@ -23,6 +26,15 @@ public class LabWork {
     public LabWork() {
     }
 
+    /**
+     * @param name Name of lab
+     * @param coordinates coordinates
+     * @param minimalPoint minimal point you can get on lab
+     * @param description description of the lab
+     * @param averagePoint average point students get
+     * @param difficulty how difficult is lab
+     * @param discipline the lab subject
+     */
     public LabWork(String name, Coordinates coordinates, float minimalPoint, String description, Integer averagePoint, Difficulty difficulty, Discipline discipline) {
         this.name = name;
         this.coordinates = coordinates;

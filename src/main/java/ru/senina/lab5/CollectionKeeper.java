@@ -1,13 +1,15 @@
 package ru.senina.lab5;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import ru.senina.lab5.labwork.Difficulty;
 import ru.senina.lab5.labwork.Discipline;
 import ru.senina.lab5.labwork.LabWork;
 
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+/**
+ * Class to keep collection's elements
+ */
 public class CollectionKeeper {
 
     @JsonIgnore
@@ -27,6 +29,10 @@ public class CollectionKeeper {
     public CollectionKeeper() {
 
     }
+
+    /**
+     * @param list of collection's elements
+     */
     public CollectionKeeper(LinkedList<LabWork> list) {
         this.list = list;
     }
@@ -54,6 +60,12 @@ public class CollectionKeeper {
         return dateFormat.format(time);
     }
 
+    /**
+     * Update element with given ID
+     * @param id given ID
+     * @param labWork element update value
+     * @return String result of method work. If it finished successful
+     */
     public String updateID(long id, LabWork labWork){
         for(int i=0; i < list.size(); i++){
            if(list.get(i).getId() == id){
@@ -64,11 +76,21 @@ public class CollectionKeeper {
         return "There is no element with id: " + id + " in collection.";
     }
 
+    /**
+     * Add element to collection
+     * @param element element to add
+     * @return String result of method work. If it finished successful
+     */
     public String add(LabWork element) {
         list.add(element);
         return "Element with id: " + element.getId() + " was successfully added.";
     }
 
+    /**
+     * Remove element with given id
+     * @param id given id
+     * @return String result of method work. If it finished successful
+     */
     public String removeById(long id) {
         for(int i=0; i < list.size(); i++){
             if(list.get(i).getId() == id){
@@ -79,11 +101,20 @@ public class CollectionKeeper {
         return "There is no element with id: " + id + " in collection.";
     }
 
+    /**
+     * Clear collection
+     * @return String result of method work. If it finished successful
+     */
     public String clear() {
         list.clear();
         return "The collection was successfully cleared.";
     }
 
+    /**
+     * Remove element with given index
+     * @param index given index
+     * @return String result of method work. If it finished successful
+     */
     public String removeAt(int index) {
         try {
             long id = list.remove(index).getId();
@@ -93,11 +124,20 @@ public class CollectionKeeper {
         }
     }
 
+    /**
+     * Sort collection
+     * @return String result of method work. If it finished successful
+     */
     public String sort() {
         list.sort(comparator);
         return "Collection was successfully sort.";
     }
 
+    /**
+     * Remove element with grater value of SelfStudyHours of given element
+     * @param element given element
+     * @return String result of method work. If it finished successful
+     */
     public String removeGreater(LabWork element) {
         List<Integer> indexToDelete = new ArrayList<>();
         for(int i = 0; i < list.size(); i++){
@@ -111,6 +151,11 @@ public class CollectionKeeper {
         return "All elements greater then entered were successfully removed.";
     }
 
+    /**
+     * Sort by difficulty of subject
+     * @return String result of method work. If it finished successful
+     * @throws IndexOutOfBoundsException if no elements in collection
+     */
     public LabWork minByDifficulty() throws IndexOutOfBoundsException{
         try {
             LabWork element = list.get(0);
@@ -125,6 +170,11 @@ public class CollectionKeeper {
         }
     }
 
+    /**
+     * Filter by given description
+     * @param description given description
+     * @return String result of method work. If it finished successful
+     */
     public List<LabWork> filterByDescription(String description) {
         List<LabWork> filteredElements = new ArrayList<>();
         for(LabWork element : list){

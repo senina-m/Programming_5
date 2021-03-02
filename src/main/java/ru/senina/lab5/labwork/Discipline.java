@@ -4,6 +4,9 @@ import ru.senina.lab5.InvalidArgumentsException;
 
 import java.util.Objects;
 
+/**
+ * The class-field in LabWork class
+ */
 public class Discipline {
     private String name; //Поле не может быть null, Строка не может быть пустой
     private long lectureHours;
@@ -13,6 +16,12 @@ public class Discipline {
     public Discipline() {
     }
 
+    /**
+     * @param name name of subject
+     * @param lectureHours lecture hours of subject
+     * @param practiceHours practice hours of subject
+     * @param selfStudyHours selfstudy hours of subject
+     */
     public Discipline(String name, long lectureHours, Integer practiceHours, int selfStudyHours) {
         this.name = name;
         this.lectureHours = lectureHours;

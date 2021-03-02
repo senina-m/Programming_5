@@ -1,5 +1,9 @@
 package ru.senina.lab5.labwork;
 
+/**
+ * Description how difficult is something
+ * @see ru.senina.lab5.labwork.LabWork
+ */
 public enum Difficulty {
     VERY_EASY(0),
     NORMAL(1),
