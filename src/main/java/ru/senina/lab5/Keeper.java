@@ -82,7 +82,7 @@ public class Keeper {
         while (true) {
             try {
                 System.out.print("> ");
-                String[] newline = br.readLine().split(" ");
+                String[] newline = br.readLine().split("[ \t\f]+");
                 String[] line = cleanLine(newline);
                 if (line.length > 0) {
                     if (commandMap.containsKey(line[0])) {
@@ -161,8 +161,7 @@ public class Keeper {
                         if (commandIsReady) {
                             System.out.println(command.run());
                         }
-                    }
-                    if (line[0].equals("exit")) {
+                    } else if (line[0].equals("exit")) {
                         br.close();
                         System.exit(0);
                     } else if (line[0].equals("execute_script")) {

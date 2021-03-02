@@ -18,9 +18,12 @@ public class ShowCommand extends CommandWithoutArgs {
     @Override
     protected String doRun(){
         try {
-            System.out.println("You have entered show command.");
-            parser.fromCollectionKeeperToJsonElements(collectionKeeper);
-            return parser.fromCollectionKeeperToJsonElements(collectionKeeper);
+            if(collectionKeeper.getAmountOfElements()!= 0) {
+                parser.fromCollectionKeeperToJsonElements(collectionKeeper);
+                return parser.fromCollectionKeeperToJsonElements(collectionKeeper);
+            } else {
+                return "No elements in collection.";
+            }
         }
         catch (JsonProcessingException e){
             return "Parsing was failed.";
