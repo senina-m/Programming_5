@@ -7,11 +7,9 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import ru.senina.lab5.labwork.LabWork;
 
 import java.io.*;
-import java.nio.file.Files;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
-import java.util.Scanner;
 
 /**
  * Class that works with json and output
@@ -22,9 +20,7 @@ public class Parser {
     public Parser() {
     }
 
-    /**
-     *
-     * @param json json string
+    /**@param json json string
      * @return CollectionKeeper instance with fields serialized from json
      * @throws JsonProcessingException if something got wrong with json
      */
@@ -35,9 +31,9 @@ public class Parser {
     }
 
     /**
-     * @param path
-     * @return
-     * @throws IOException
+     * @param path of the file from which json would be read
+     * @return json string from given file
+     * @throws IOException If there is no such file
      */
     public String fromFileToString(String path) throws IOException {
             StringBuilder resultString = new StringBuilder();

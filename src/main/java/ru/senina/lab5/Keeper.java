@@ -14,7 +14,7 @@ import java.util.*;
  * Class to deal with input and output and keep CollectionKeeper class instance.
  */
 public class Keeper {
-    private String filename;
+    private final String filename;
     private CollectionKeeper collectionKeeper;
 
     /**
@@ -34,10 +34,11 @@ public class Keeper {
             collectionKeeper = parser.fromJsonToCollectionKeeper(parser.fromFileToString(filename));
         } catch (InvalidArgumentsException | NullPointerException | IOException e) {
             System.out.println("Filename is wrong. Run program again with correct filename.");
-
+            System.exit(0);
         }
 
         Map<String, Command> commandMap = new HashMap<>();
+        //TODO: передавать команде помощи этот меп?
         commandMap.put("help", new HelpCommand());
         commandMap.put("info", new InfoCommand(collectionKeeper));
         commandMap.put("show", new ShowCommand(collectionKeeper, parser));
@@ -52,6 +53,7 @@ public class Keeper {
         commandMap.put("min_by_difficulty", new MinByDifficultyCommand(collectionKeeper, parser));
         commandMap.put("filter_by_description", new FilterByDescriptionCommand(collectionKeeper, parser));
         commandMap.put("print_descending", new PrintDescendingCommand(collectionKeeper, parser));
+
         try {
             terminal(parser, commandMap, "no file", 0);
         } catch (IOException e) {
@@ -69,8 +71,9 @@ public class Keeper {
      */
     public void terminal(Parser parser, Map<String, Command> commandMap, String filename, int level) throws IOException {
         if (level > 10) {
-            System.out.println("You can't execute file recursively more then 10 times! The programme will be finished!");
-            System.exit(1);
+            System.out.println("You can't execute file recursively more then 10 times! You are not in execute script anymore!");
+            level = 0;
+            filename = "no file";
         }
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -78,19 +81,17 @@ public class Keeper {
         if (f.exists() && !f.isDirectory() && Files.isReadable(f.toPath())) {
             br = new BufferedReader(new InputStreamReader(new FileInputStream(filename)));
         }
-
         while (true) {
             try {
                 System.out.print("> ");
-                String[] newline = br.readLine().split("[ \t\f]+");
-                String[] line = cleanLine(newline);
+                String readLine = br.readLine();
+                String[] line = cleanLine(readLine.split("[ \t\f]+"));
                 if (line.length > 0) {
                     if (commandMap.containsKey(line[0])) {
                         boolean validCommand = true;
                         Command command = commandMap.get(line[0]);
                         command.setArgs(line);
                         boolean commandIsReady = true;
-                        // TODO: переписать чтобы было без commandIsReady
                         if (command instanceof ElementNeed) {
                             commandIsReady = false;
                             boolean exit = false;
@@ -162,8 +163,7 @@ public class Keeper {
                             System.out.println(command.run());
                         }
                     } else if (line[0].equals("exit")) {
-                        br.close();
-                        System.exit(0);
+                        break;
                     } else if (line[0].equals("execute_script")) {
                         if (line.length != 2) {
                             System.out.println("execute_script have the only argument - filename.");
@@ -176,6 +176,11 @@ public class Keeper {
                 }
             } catch (InvalidArgumentsException e) {
                 System.out.println(e.getMessage());
+            } catch (NullPointerException e) {
+                System.out.println("You have entered the end of file symbol. Program will be terminate and collection will be saved.");
+                commandMap.get("save").setArgs(new String[]{"save"});
+                commandMap.get("save").run();
+                System.exit(0);
             }
         }
     }
