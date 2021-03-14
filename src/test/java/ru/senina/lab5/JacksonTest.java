@@ -22,7 +22,6 @@ public class JacksonTest {
     @Disabled
     @Test
     public void testFromJsonToCollection() throws JsonProcessingException {
-        //TODO: работает, если не считать того, что amountOfElements не обновляется
         String json = "{\"list\":[ {\n" +
                 "    \"id\" : 1111,\n" +
                 "    \"name\" : \"element\",\n" +

@@ -9,7 +9,7 @@ public class InfoCommand extends CommandWithoutArgs {
     CollectionKeeper collectionKeeper;
 
     public InfoCommand(CollectionKeeper collectionKeeper) {
-        super("info");
+        super("info", "print information about the collection (type, initialization date, number of elements, etc.) to the standard output stream");
         this.collectionKeeper = collectionKeeper;
     }
 

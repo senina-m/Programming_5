@@ -4,13 +4,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import ru.senina.lab5.CollectionKeeper;
 import ru.senina.lab5.Parser;
 
-
+/**
+ * Command class to find the minimum difficult subject in the collection
+ */
 public class MinByDifficultyCommand extends CommandWithoutArgs {
-    private CollectionKeeper collectionKeeper;
-    private Parser parser;
+    private final CollectionKeeper collectionKeeper;
+    private final Parser parser;
 
     public MinByDifficultyCommand(CollectionKeeper collectionKeeper, Parser parser) {
-        super("min_by_difficulty");
+        super("min_by_difficulty", "remove any object from the collection with the minimum difficulty value");
         this.collectionKeeper = collectionKeeper;
         this.parser = parser;
     }

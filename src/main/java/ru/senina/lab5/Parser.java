@@ -7,9 +7,11 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import ru.senina.lab5.labwork.LabWork;
 
 import java.io.*;
+import java.sql.SQLOutput;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
+import java.util.Optional;
 
 /**
  * Class that works with json and output
@@ -24,10 +26,16 @@ public class Parser {
      * @return CollectionKeeper instance with fields serialized from json
      * @throws JsonProcessingException if something got wrong with json
      */
-    public CollectionKeeper fromJsonToCollectionKeeper(String json) throws JsonProcessingException {
+    public CollectionKeeper fromJsonToCollectionKeeper(String json) throws JsonProcessingException, InvalidArgumentsException {
         objectMapper.registerModule(new JavaTimeModule());
         objectMapper.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-        return objectMapper.readValue(json, CollectionKeeper.class);
+        CollectionKeeper result = objectMapper.readValue(json, CollectionKeeper.class);
+        if(result.getList() != null){
+            return result;
+        }else{
+            System.out.println("The file contents isn't valid. The collection will be empty.");
+            return new CollectionKeeper();
+        }
     }
 
     /**
@@ -48,6 +56,12 @@ public class Parser {
             return resultString.toString();
     }
 
+    /**
+     * Method to write json string to file
+     * @param filename the path to which file value have be writen
+     * @param str the json string
+     * @throws IOException if there is no such file
+     */
     public void writeStringToFile(String filename, String str) throws IOException{
             BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(filename)));
             writer.write("");
@@ -55,6 +69,12 @@ public class Parser {
             writer.close();
     }
 
+    /**
+     * Method that parses CollectionKeeper Object to json string
+     * @param collectionKeeper Object to parse
+     * @return json string
+     * @throws JsonProcessingException if there were some problems with JACKSON library
+     */
     public String fromCollectionKeeperToJson(CollectionKeeper collectionKeeper) throws JsonProcessingException {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm a z");
         objectMapper.registerModule(new JavaTimeModule());
@@ -63,6 +83,12 @@ public class Parser {
         return objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(collectionKeeper);
     }
 
+    /**
+     * Method to parse CollectionKeeper elements Objects to json string
+     * @param collectionKeeper Object whose elements we need to parse
+     * @return json string
+     * @throws JsonProcessingException if there were some problems with JACKSON library
+     */
     public String fromCollectionKeeperToJsonElements(CollectionKeeper collectionKeeper) throws
             JsonProcessingException {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm a z");
@@ -77,6 +103,12 @@ public class Parser {
         return resultString.toString();
     }
 
+    /**
+     * Method to parse given LabWork element to json string
+     * @param element LabWork object
+     * @return json string
+     * @throws JsonProcessingException if there were some problems with JACKSON library
+     */
     public String fromElementToString(LabWork element) throws JsonProcessingException {
         DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm a z");
         objectMapper.registerModule(new JavaTimeModule());

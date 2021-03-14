@@ -6,8 +6,9 @@ import ru.senina.lab5.InvalidArgumentsException;
  * Command's who don't have string arguments parent
  */
 public abstract class CommandWithoutArgs extends Command{
-    public CommandWithoutArgs(String name) {
-        super(name);
+
+    public CommandWithoutArgs(String name, String description) {
+        super(name, description);
     }
 
     @Override

@@ -4,13 +4,16 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import ru.senina.lab5.CollectionKeeper;
 import ru.senina.lab5.Parser;
 
+/**
+ * Command shows all collection elements
+ */
 public class ShowCommand extends CommandWithoutArgs {
 
-    private CollectionKeeper collectionKeeper;
-    private Parser parser;
+    private final CollectionKeeper collectionKeeper;
+    private final Parser parser;
 
     public ShowCommand(CollectionKeeper collectionKeeper, Parser parser) {
-        super("show");
+        super("show", "print to standard output all elements of the collection in string representation");
         this.collectionKeeper =  collectionKeeper;
         this.parser = parser;
     }

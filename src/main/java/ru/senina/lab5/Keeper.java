@@ -1,5 +1,6 @@
 package ru.senina.lab5;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import ru.senina.lab5.commands.*;
 import ru.senina.lab5.labwork.Coordinates;
 import ru.senina.lab5.labwork.Difficulty;
@@ -32,14 +33,13 @@ public class Keeper {
         try {
             File f = new File(filename);
             collectionKeeper = parser.fromJsonToCollectionKeeper(parser.fromFileToString(filename));
-        } catch (InvalidArgumentsException | NullPointerException | IOException e) {
+        } catch (NullPointerException | IOException e) {
             System.out.println("Filename is wrong. Run program again with correct filename.");
             System.exit(0);
         }
 
         Map<String, Command> commandMap = new HashMap<>();
-        //TODO: передавать команде помощи этот меп?
-        commandMap.put("help", new HelpCommand());
+        commandMap.put("help", new HelpCommand(commandMap));
         commandMap.put("info", new InfoCommand(collectionKeeper));
         commandMap.put("show", new ShowCommand(collectionKeeper, parser));
         commandMap.put("add", new AddCommand(collectionKeeper));
@@ -53,13 +53,11 @@ public class Keeper {
         commandMap.put("min_by_difficulty", new MinByDifficultyCommand(collectionKeeper, parser));
         commandMap.put("filter_by_description", new FilterByDescriptionCommand(collectionKeeper, parser));
         commandMap.put("print_descending", new PrintDescendingCommand(collectionKeeper, parser));
-
         try {
             terminal(parser, commandMap, "no file", 0);
         } catch (IOException e) {
             throw new InvalidArgumentsException("You have entered wrong file name. Try the command again.");
         }
-
     }
 
     /**
@@ -88,7 +86,6 @@ public class Keeper {
                 String[] line = cleanLine(readLine.split("[ \t\f]+"));
                 if (line.length > 0) {
                     if (commandMap.containsKey(line[0])) {
-                        boolean validCommand = true;
                         Command command = commandMap.get(line[0]);
                         command.setArgs(line);
                         boolean commandIsReady = true;
@@ -97,7 +94,6 @@ public class Keeper {
                             boolean exit = false;
                             while (!exit) {
                                 try {
-                                    //TODO: rewrite without code duplication
                                     LabWork element = new LabWork();
                                     System.out.println("You run a command, which needs LabWork element to be entered.");
 

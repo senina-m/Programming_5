@@ -3,12 +3,15 @@ package ru.senina.lab5.commands;
 import ru.senina.lab5.CollectionKeeper;
 import ru.senina.lab5.InvalidArgumentsException;
 
+/**
+ * Command removes element from collection by it's ID
+ */
 public class RemoveByIDCommand extends Command {
-    private CollectionKeeper collectionKeeper;
+    private final CollectionKeeper collectionKeeper;
     private long id;
 
     public RemoveByIDCommand(CollectionKeeper collectionKeeper) {
-        super("remove_by_id");
+        super("remove_by_id id", "remove an item from the collection by its id");
         this.collectionKeeper = collectionKeeper;
     }
 

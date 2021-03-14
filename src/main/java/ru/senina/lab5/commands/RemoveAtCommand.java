@@ -3,12 +3,15 @@ package ru.senina.lab5.commands;
 import ru.senina.lab5.CollectionKeeper;
 import ru.senina.lab5.InvalidArgumentsException;
 
+/** * Command that removes element on given place in collection
+ */
 public class RemoveAtCommand extends Command {
-    private CollectionKeeper collectionKeeper;
+    private final CollectionKeeper collectionKeeper;
     private int index;
 
     public RemoveAtCommand(CollectionKeeper collectionKeeper) {
-        super("remove_at");
+        super("remove_at index", "remove the element at the given collection position (index)");
+        this.collectionKeeper = collectionKeeper;
     }
 
     @Override

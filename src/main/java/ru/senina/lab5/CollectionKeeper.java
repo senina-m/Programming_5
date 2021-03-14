@@ -27,7 +27,7 @@ public class CollectionKeeper {
     }
 
     public CollectionKeeper() {
-
+        this.list = new LinkedList<>();
     }
 
     /**
@@ -185,12 +185,19 @@ public class CollectionKeeper {
         return filteredElements;
     }
 
+    /**
+     * Method to sort the list of elements
+     * @return sorted list of LabWork objects
+     */
     public List<LabWork> getSortedList() {
         List<LabWork> newList = this.list;
         newList.sort(comparator);
         return newList;
     }
 
+    /**
+     * Class to override compare method for LabWork objects
+     */
     static class Comparator implements java.util.Comparator<LabWork> {
 
         @Override

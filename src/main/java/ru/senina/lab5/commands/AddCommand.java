@@ -11,7 +11,7 @@ public class AddCommand extends CommandWithoutArgs implements ElementNeed{
     private LabWork element;
 
     public AddCommand(CollectionKeeper collectionKeeper) {
-        super("add");
+        super("add {element}", "add new element to collection");
         this.collectionKeeper = collectionKeeper;
     }
 

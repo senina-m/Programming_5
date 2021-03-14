@@ -8,13 +8,16 @@ import ru.senina.lab5.labwork.LabWork;
 
 import java.util.List;
 
+/**
+ * Command to find all elements in collection with given description
+ */
 public class FilterByDescriptionCommand extends Command {
-    private CollectionKeeper collectionKeeper;
+    private final CollectionKeeper collectionKeeper;
     private String description;
-    private Parser parser;
+    private final Parser parser;
 
     public FilterByDescriptionCommand(CollectionKeeper collectionKeeper, Parser parser) {
-        super("filter_by_description");
+        super("filter_by_description description", "display elements whose description field value is equal to the given one");
         this.collectionKeeper = collectionKeeper;
         this.parser = parser;
     }

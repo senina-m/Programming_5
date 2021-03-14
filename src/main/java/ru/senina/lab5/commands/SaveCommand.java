@@ -5,13 +5,16 @@ import ru.senina.lab5.Parser;
 
 import java.io.IOException;
 
+/**
+ * Command saves collection to file
+ */
 public class SaveCommand extends CommandWithoutArgs {
-    private CollectionKeeper collectionKeeper;
-    private Parser parser;
+    private final CollectionKeeper collectionKeeper;
+    private final Parser parser;
     private String filename;
 
     public SaveCommand(CollectionKeeper collectionKeeper, Parser parser, String filename) {
-        super("save");
+        super("save", "save collection to file");
         this.collectionKeeper = collectionKeeper;
         this.parser = parser;
         this.filename = filename;

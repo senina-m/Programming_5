@@ -1,15 +1,18 @@
 package ru.senina.lab5.commands;
 
 /**
- * Parent of all commands
+ * Parent of all commands classes
  */
 public abstract class Command {
-    private final String name;
     private String[] args;
+    private final String name;
+    private final String description;
 
-    public Command(String name) {
+    protected Command(String name, String description) {
         this.name = name;
+        this.description = description;
     }
+
     public void setArgs(String[] args){
         this.args = args;
     }
@@ -34,4 +37,11 @@ public abstract class Command {
      */
     public abstract void validateArguments();
 
+    public String getName() {
+        return name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
 }

@@ -4,15 +4,17 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import ru.senina.lab5.CollectionKeeper;
 import ru.senina.lab5.Parser;
 import ru.senina.lab5.labwork.LabWork;
-
 import java.util.List;
 
+/**
+ * Command to print elements of collection in inverted sorted order
+ */
 public class PrintDescendingCommand extends CommandWithoutArgs {
-    private CollectionKeeper collectionKeeper;
-    private Parser parser;
+    private final CollectionKeeper collectionKeeper;
+    private final Parser parser;
 
     public PrintDescendingCommand(CollectionKeeper collectionKeeper, Parser parser) {
-        super("print_descending");
+        super("print_descending", "display the elements of the collection in descending order");
         this.collectionKeeper = collectionKeeper;
         this.parser = parser;
     }

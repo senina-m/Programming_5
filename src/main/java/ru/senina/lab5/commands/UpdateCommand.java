@@ -4,13 +4,16 @@ import ru.senina.lab5.CollectionKeeper;
 import ru.senina.lab5.InvalidArgumentsException;
 import ru.senina.lab5.labwork.LabWork;
 
+/**
+ * Command updates the element with given ID in collection
+ */
 public class UpdateCommand extends Command implements ElementNeed {
     final CollectionKeeper collectionKeeper;
     private LabWork element;
     private long id;
 
     public UpdateCommand(CollectionKeeper collectionKeeper) {
-        super("update");
+        super("update id {element}", "update the value of the collection element whose id is equal to the given");
         this.collectionKeeper = collectionKeeper;
     }
 
