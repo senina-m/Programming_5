@@ -1,6 +1,5 @@
 package ru.senina.lab5;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import ru.senina.lab5.commands.*;
 import ru.senina.lab5.labwork.Coordinates;
 import ru.senina.lab5.labwork.Difficulty;
@@ -32,9 +31,14 @@ public class Keeper {
         Parser parser = new Parser();
         try {
             File f = new File(filename);
-            collectionKeeper = parser.fromJsonToCollectionKeeper(parser.fromFileToString(filename));
+            if(!f.isDirectory() && Files.isReadable(f.toPath())){
+                collectionKeeper = parser.fromJsonToCollectionKeeper(parser.fromFileToString(filename));
+            }else{
+                System.out.println("There is no rights for reading file. Change rights and run program again!");
+                System.exit(0);
+            }
         } catch (NullPointerException | IOException e) {
-            System.out.println("Filename is wrong. Run program again with correct filename.");
+            System.out.println("File path is wrong. Run program again with correct filename.");
             System.exit(0);
         }
 
@@ -76,9 +80,10 @@ public class Keeper {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         File f = new File(filename);
-        if (f.exists() && !f.isDirectory() && Files.isReadable(f.toPath())) {
+        if (f.exists()) {
             br = new BufferedReader(new InputStreamReader(new FileInputStream(filename)));
         }
+
         while (true) {
             try {
                 System.out.print("> ");
